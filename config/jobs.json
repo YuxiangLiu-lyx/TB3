@@ -1,0 +1,22 @@
+{
+  "region": "va",
+  "jobs": [
+    {
+      "name": "active-products",
+      "enabled": true,
+      "kind": "periodic",
+      "interval_seconds": 3600,
+      "dataset": "products",
+      "mode": "forward",
+      "sql": "SELECT id FROM business WHERE active = 1 ORDER BY id"
+    },
+    {
+      "name": "initial-images",
+      "enabled": false,
+      "kind": "once",
+      "dataset": "image_only",
+      "mode": "realtime",
+      "sql": "SELECT id FROM business ORDER BY id"
+    }
+  ]
+}

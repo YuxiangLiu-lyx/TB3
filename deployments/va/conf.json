@@ -1,0 +1,69 @@
+{
+  "region": "va",
+  "indexes": [
+    {
+      "corpusID": 101,
+      "feature_name": "image_embedding",
+      "db_name": "va_vectors_image_1001",
+      "namespace": "va_vectors",
+      "is_compressed": false,
+      "extra_config": {}
+    },
+    {
+      "corpusID": 102,
+      "feature_name": "image_embedding",
+      "db_name": "va_vectors_image_comp_2002",
+      "namespace": "va_vectors",
+      "is_compressed": true,
+      "extra_config": {
+        "recall": {
+          "return_attr": true
+        }
+      }
+    },
+    {
+      "corpusID": 103,
+      "feature_name": "image_embedding",
+      "db_name": "va_vectors_image_comp_shadow_3003",
+      "namespace": "va_vectors",
+      "is_compressed": true,
+      "extra_config": {}
+    },
+    {
+      "corpusID": 104,
+      "feature_name": "text_embedding",
+      "db_name": "va_vectors_text_4004",
+      "namespace": "va_vectors",
+      "is_compressed": false,
+      "extra_config": {
+        "attr": {
+          "source": "catalog"
+        }
+      }
+    }
+  ],
+  "datasets": {
+    "products": [
+      101,
+      102,
+      103,
+      104
+    ],
+    "image_only": [
+      101,
+      102
+    ],
+    "shadow_only": [
+      103
+    ],
+    "image_normal_only": [
+      101
+    ],
+    "image_compressed_only": [
+      102
+    ],
+    "text_only": [
+      104
+    ]
+  }
+}

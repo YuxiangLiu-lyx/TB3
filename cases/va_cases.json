@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "indexes": {
+    "normal_image": {
+      "corpusID": 101, "namespace": "va_vectors", "db_name": "va_vectors_image_1001",
+      "feature_name": "image_embedding", "is_compressed": false, "queue": "va.write.image"
+    },
+    "normal_text": {
+      "corpusID": 104, "namespace": "va_vectors", "db_name": "va_vectors_text_4004",
+      "feature_name": "text_embedding", "is_compressed": false, "queue": "va.write.text"
+    },
+    "compressed_image": {
+      "corpusID": 102, "namespace": "va_vectors", "db_name": "va_vectors_image_comp_2002",
+      "feature_name": "image_embedding", "is_compressed": true, "queue": "va.write.image_comp"
+    },
+    "compressed_shadow": {
+      "corpusID": 103, "namespace": "va_vectors", "db_name": "va_vectors_image_comp_shadow_3003",
+      "feature_name": "image_embedding", "is_compressed": true, "queue": "va.write.image_comp_shadow"
+    }
+  },
+  "cases": [
+    {
+      "id": "normal_image_sql",
+      "description": "SQL 写入普通图片索引，再验证落盘和召回归属",
+      "target": "normal_image",
+      "expected_ids": ["p1", "p3"],
+      "expected_record_count": 2,
+      "requests": [{"op": "sql", "dataset": "image_normal_only", "mode": "forward",
+                    "sql": "SELECT id FROM business WHERE id IN ('p1', 'p3') ORDER BY id"}]
+    },
+    {
+      "id": "normal_text_task_queue",
+      "description": "直接投递任务队列，经过特征服务和文本专属队列后写入普通文本索引",
+      "target": "normal_text",
+      "expected_ids": ["p2", "p4"],
+      "expected_record_count": 2,
+      "requests": [{"op": "send", "queue": "va.tasks", "kind": "task",
+                    "payload_file": "messages/text_task.json"}]
+    },
+    {
+      "id": "compressed_image_sql",
+      "description": "SQL 写入三条业务数据，压缩索引保留全部业务 ID 并合并相同向量",
+      "target": "compressed_image",
+      "expected_ids": ["p1", "p2", "p3"],
+      "expected_record_count": 2,
+      "requests": [{"op": "sql", "dataset": "image_compressed_only", "mode": "forward",
+                    "sql": "SELECT id FROM business WHERE active = 1 ORDER BY id"}]
+    },
+    {
+      "id": "compressed_shadow_write_queue",
+      "description": "直接向另一个压缩库的专属队列投递两个相同向量，并验证实际存储和召回",
+      "target": "compressed_shadow",
+      "expected_ids": ["shadow-a", "shadow-b"],
+      "expected_record_count": 1,
+      "requests": [
+        {"op": "send", "queue": "va.write.image_comp_shadow", "kind": "write",
+         "payload_file": "messages/shadow_a.json"},
+        {"op": "send", "queue": "va.write.image_comp_shadow", "kind": "write",
+         "payload_file": "messages/shadow_b.json"}
+      ]
+    },
+    {
+      "id": "unknown_queue",
+      "description": "不存在的消息队列必须返回错误",
+      "expect_error": true,
+      "requests": [{"op": "send", "queue": "va.queue.does_not_exist", "kind": "task",
+                    "payload_file": "messages/text_task.json"}]
+    },
+    {
+      "id": "invalid_message",
+      "description": "缺失写入字段的消息在消费时返回错误",
+      "expect_error": true,
+      "requests": [{"op": "send", "queue": "va.write.image", "kind": "write",
+                    "payload": {"id": "invalid-record"}}]
+    },
+    {
+      "id": "wrong_queue",
+      "description": "把目标为压缩影子库的合法消息送到普通图片库队列，必须返回错误",
+      "expect_error": true,
+      "requests": [{"op": "send", "queue": "va.write.image", "kind": "write",
+                    "payload_file": "messages/shadow_a.json"}]
+    },
+    {
+      "id": "missing_tcc",
+      "description": "移除实验副本的 TCC 文件后，写入必须返回真实配置读取错误",
+      "fault": "missing_tcc",
+      "expect_error": true,
+      "requests": [{"op": "sql", "dataset": "image_normal_only", "mode": "forward",
+                    "sql": "SELECT id FROM business WHERE id = 'p1'"}]
+    },
+    {
+      "id": "unknown_corpus",
+      "description": "召回不存在的 corpusID 必须返回错误",
+      "expect_error": true,
+      "requests": [{"op": "recall", "corpusID": 999999, "embedding": [0,0,0,0,0,0,0,0]}]
+    },
+    {
+      "id": "invalid_recall_embedding",
+      "description": "召回请求的向量维度错误时必须返回错误",
+      "expect_error": true,
+      "requests": [{"op": "recall", "corpusID": 101, "embedding": [0.1]}]
+    }
+  ]
+}

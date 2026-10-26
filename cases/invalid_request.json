@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "cases": [
+    {
+      "id": "invalid_request",
+      "description": "错误请求：向已注册队列发送缺少必填字段的写入消息；消费者报错，验证器必须判失败并返回退出码 1",
+      "requests": [
+        {"op": "send", "queue": "va.write.image", "kind": "write", "payload": {"id": "invalid-record"}}
+      ]
+    }
+  ]
+}

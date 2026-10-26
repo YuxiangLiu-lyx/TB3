@@ -1,0 +1,18 @@
+{
+  "region": "va",
+  "namespace": "va_vectors",
+  "features": {
+    "image_embedding": {
+      "dimension": 8,
+      "seed": "image-model-v1"
+    },
+    "text_embedding": {
+      "dimension": 6,
+      "seed": "text-model-v1"
+    }
+  },
+  "recall": {
+    "top_k": 3,
+    "return_attr": false
+  }
+}

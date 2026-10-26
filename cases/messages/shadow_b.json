@@ -1,0 +1,13 @@
+{
+  "id": "shadow-b",
+  "embedding": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+  "db_list": ["va_vectors_image_comp_shadow_3003"],
+  "compressed_db_list": ["va_vectors_image_comp_shadow_3003"],
+  "context": {
+    "task_id": "example-shadow-b",
+    "dataset": "shadow_only",
+    "feature_name": "image_embedding",
+    "mode": "realtime",
+    "attr_by_db": {"va_vectors_image_comp_shadow_3003": {}}
+  }
+}

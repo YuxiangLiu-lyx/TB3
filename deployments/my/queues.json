@@ -1,0 +1,59 @@
+{
+  "region": "my",
+  "task_queue": "my.tasks",
+  "index_queues": {
+    "my_vectors_image_71931": "my.write.image",
+    "my_vectors_image_comp_86204": "my.write.image_comp",
+    "my_vectors_image_comp_shadow_39082": "my.write.image_comp_shadow",
+    "my_vectors_text_54726": "my.write.text"
+  },
+  "consumers": {
+    "my-writer": {
+      "region": "my",
+      "service": "writer"
+    },
+    "my-tasks-unconfigured": {
+      "region": "my",
+      "service": "reject",
+      "reason": "MY task computation/return routing is not configured; implement it as an engineering exercise"
+    },
+    "my-to-va": {
+      "region": "my",
+      "service": "mirror",
+      "target_region": "va",
+      "target_queue": "va.tasks"
+    }
+  },
+  "bindings": {
+    "my.tasks": {
+      "region": "my",
+      "consumer": "my-tasks-unconfigured",
+      "enabled": true
+    },
+    "my.write.image": {
+      "region": "my",
+      "consumer": "my-writer",
+      "enabled": true
+    },
+    "my.write.image_comp": {
+      "region": "my",
+      "consumer": "my-writer",
+      "enabled": true
+    },
+    "my.write.image_comp_shadow": {
+      "region": "my",
+      "consumer": "my-writer",
+      "enabled": true
+    },
+    "my.write.text": {
+      "region": "my",
+      "consumer": "my-writer",
+      "enabled": true
+    },
+    "my.export.va": {
+      "region": "my",
+      "consumer": "my-to-va",
+      "enabled": true
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "example-text-task",
+  "dataset": "text_only",
+  "ids": ["p2", "p4"],
+  "mode": "forward"
+}

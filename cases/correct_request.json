@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "cases": [
+    {
+      "id": "correct_request",
+      "description": "正确请求：SQL 写入两个普通库和两个压缩库，再投递任务/写入消息并核对四个库的召回结果",
+      "requests": [
+        {
+          "op": "sql", "dataset": "products", "mode": "forward",
+          "sql": "SELECT id FROM business WHERE id IN ('p1', 'p2') ORDER BY id",
+          "expected_ids": ["p1", "p2"]
+        },
+        {
+          "op": "send", "queue": "va.tasks", "kind": "task",
+          "payload_file": "messages/text_task.json"
+        },
+        {
+          "op": "send", "queue": "va.write.image_comp_shadow", "kind": "write",
+          "payload_file": "messages/shadow_a.json"
+        },
+        {"op": "recall", "corpusID": 101, "embedding": [0,0,0,0,0,0,0,0], "top_k": 3},
+        {"op": "recall", "corpusID": 102, "embedding": [0,0,0,0,0,0,0,0], "top_k": 3},
+        {"op": "recall", "corpusID": 103, "embedding": [0,0,0,0,0,0,0,0], "top_k": 3},
+        {"op": "recall", "corpusID": 104, "embedding": [0,0,0,0,0,0], "top_k": 3}
+      ]
+    }
+  ]
+}

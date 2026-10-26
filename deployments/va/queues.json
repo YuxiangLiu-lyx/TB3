@@ -1,0 +1,64 @@
+{
+  "region": "va",
+  "task_queue": "va.tasks",
+  "index_queues": {
+    "va_vectors_image_1001": "va.write.image",
+    "va_vectors_image_comp_2002": "va.write.image_comp",
+    "va_vectors_image_comp_shadow_3003": "va.write.image_comp_shadow",
+    "va_vectors_text_4004": "va.write.text"
+  },
+  "consumers": {
+    "va-preprocessor": {
+      "region": "va",
+      "service": "preprocessor",
+      "outputs": {
+        "va_vectors_image_1001": "va.write.image",
+        "va_vectors_image_comp_2002": "va.write.image_comp",
+        "va_vectors_image_comp_shadow_3003": "va.write.image_comp_shadow",
+        "va_vectors_text_4004": "va.write.text"
+      }
+    },
+    "va-writer": {
+      "region": "va",
+      "service": "writer"
+    },
+    "va-to-my": {
+      "region": "va",
+      "service": "mirror",
+      "target_region": "my",
+      "target_queue": "my.write.image"
+    }
+  },
+  "bindings": {
+    "va.tasks": {
+      "region": "va",
+      "consumer": "va-preprocessor",
+      "enabled": true
+    },
+    "va.write.image": {
+      "region": "va",
+      "consumer": "va-writer",
+      "enabled": true
+    },
+    "va.write.image_comp": {
+      "region": "va",
+      "consumer": "va-writer",
+      "enabled": true
+    },
+    "va.write.image_comp_shadow": {
+      "region": "va",
+      "consumer": "va-writer",
+      "enabled": true
+    },
+    "va.write.text": {
+      "region": "va",
+      "consumer": "va-writer",
+      "enabled": true
+    },
+    "va.export.my": {
+      "region": "va",
+      "consumer": "va-to-my",
+      "enabled": true
+    }
+  }
+}

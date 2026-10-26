@@ -1,0 +1,28 @@
+{
+  "id": "mirror-example",
+  "embedding": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8
+  ],
+  "db_list": [
+    "my_vectors_image_71931"
+  ],
+  "compressed_db_list": [],
+  "context": {
+    "task_id": "manual-prepared-vector",
+    "dataset": "image_normal_only",
+    "feature_name": "image_embedding",
+    "mode": "realtime",
+    "attr_by_db": {
+      "my_vectors_image_71931": {
+        "source": "mirror-example"
+      }
+    }
+  }
+}

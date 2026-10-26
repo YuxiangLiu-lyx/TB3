@@ -1,0 +1,12 @@
+{
+  "regions": {
+    "va": {
+      "config_dir": "va",
+      "fixtures_dir": "../fixtures"
+    },
+    "my": {
+      "config_dir": "my",
+      "fixtures_dir": "../fixtures"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+[
+  {"id": "p1", "category": "shoes", "active": 1},
+  {"id": "p2", "category": "shoes", "active": 1},
+  {"id": "p3", "category": "books", "active": 1},
+  {"id": "p4", "category": "archived", "active": 0}
+]

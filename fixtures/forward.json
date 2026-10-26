@@ -1,0 +1,6 @@
+{
+  "p1": {"image_embedding": "shared-shoe-photo", "text_embedding": "Red shoes size 8"},
+  "p2": {"image_embedding": "shared-shoe-photo", "text_embedding": "Red shoes size 9"},
+  "p3": {"image_embedding": "book-cover", "text_embedding": "A book about vectors"},
+  "p4": {"image_embedding": "old-photo", "text_embedding": "Archived product"}
+}
