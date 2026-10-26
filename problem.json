@@ -4,6 +4,8 @@
   "title": "接通 MY 向量索引的写入与召回链路",
   "archived_on": "2026-10-25",
   "repository": "https://github.com/YuxiangLiu-lyx/TB3",
+  "issue": "https://github.com/YuxiangLiu-lyx/TB3/issues/1",
+  "baseline_commit": "50df5c327647ecbe297ddf6c89342c41805415db",
   "baseline_branch": "problems/tb-my-001-baseline-v1",
   "baseline_tag": "problems/tb-my-001/v1",
   "prompt": "docs/AGENT_PROMPT.md",

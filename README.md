@@ -2,6 +2,8 @@
 
 本项目作为基础工程题 **TB-MY-001 / v1** 存档。交给模型时使用 [完整任务 prompt](docs/AGENT_PROMPT.md)，并遵守 [模型访问规则](AGENTS.md)：可以阅读业务背景与代码，禁止查看验证器源码和评测内部材料。原始问题的版本标识、恢复及新建解题分支方法见 [基线存档说明](docs/BASELINE_ARCHIVE.md)。
 
+题目入口：[TB-MY-001 · Issue #1](https://github.com/YuxiangLiu-lyx/TB3/issues/1)。原始代码与 prompt 固定在 [基线提交 50df5c3](https://github.com/YuxiangLiu-lyx/TB3/commit/50df5c327647ecbe297ddf6c89342c41805415db)，对应标签 `problems/tb-my-001/v1`；后续解题从该版本新建工作分支。
+
 这是用于工程改造和 AI 能力评测的模拟环境。默认提供完整 VA 写入、压缩索引和召回链路，另提供地区隔离、服务部署约束和 Mirror。具体 MY 计算、压缩处理及迁移链路留作后续工程题。
 
 Python 3.11+，仅使用标准库，不需要安装依赖或启动外部服务。文件锁使用 `fcntl`，支持 macOS / Linux。以下命令均在仓库根目录执行。

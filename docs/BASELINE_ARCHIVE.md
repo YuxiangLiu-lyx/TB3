@@ -8,6 +8,8 @@
 | 题目版本 | `v1` |
 | 归档日期 | 2026-10-25（America/New_York） |
 | 目标仓库 | https://github.com/YuxiangLiu-lyx/TB3 |
+| 题目入口 | [Issue #1](https://github.com/YuxiangLiu-lyx/TB3/issues/1) |
+| 基线 commit | `50df5c327647ecbe297ddf6c89342c41805415db` |
 | 基线分支 | `problems/tb-my-001-baseline-v1` |
 | 基线标签 | `problems/tb-my-001/v1` |
 | 模型入口 | [AGENT_PROMPT.md](AGENT_PROMPT.md) |
@@ -15,7 +17,7 @@
 | 工程题 | [MY_MIGRATION_TASK.md](MY_MIGRATION_TASK.md) |
 | 原始背景 | [ORIGINAL_REQUIREMENTS.md](ORIGINAL_REQUIREMENTS.md) |
 
-版本信息另存于 [problem.json](../problem.json)。GitHub Issue 应作为题目入口，记录基线 commit 的完整 SHA，并链接该 commit 下的 prompt 和题面。实际是否已上传以远端 ref 和维护者的发布回执为准；本文件定义归档约定，不替代上传成功确认。
+版本信息另存于 [problem.json](../problem.json)。GitHub Issue 是题目入口，记录基线 commit 的完整 SHA，并链接该 commit 下的 prompt 和题面。基线分支和标签已上传。默认分支中补充的 Issue 链接属于归档导航信息，不改变上述原始题目提交。
 
 ## 从原始问题开始一次新任务
 
